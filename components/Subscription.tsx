@@ -156,30 +156,10 @@ export default function SubscriptionManager() {
     setIsDragging(true);
   }, []);
 
-  const handleDragEnter = useCallback((e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsDragging(true);
-  }, []);
-
   const handleDragLeave = useCallback((e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     e.stopPropagation();
-    
-    // 检查是否离开了主容器
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX;
-    const y = e.clientY;
-    
-    // 如果鼠标位置在容器外部，则设置isDragging为false
-    if (
-      x < rect.left ||
-      x >= rect.right ||
-      y < rect.top ||
-      y >= rect.bottom
-    ) {
-      setIsDragging(false);
-    }
+    setIsDragging(false);
   }, []);
 
   const handleDrop = useCallback(async (e: React.DragEvent<HTMLDivElement>) => {
@@ -283,16 +263,10 @@ export default function SubscriptionManager() {
   };
 
   return (
-    <div 
-      className="p-6 relative"
-      onDragOver={handleDragOver}
-      onDragEnter={handleDragEnter}
-      onDragLeave={handleDragLeave}
-      onDrop={handleDrop}
-    >
+    <div className="p-6">
       <Toast.Provider swipeDirection="right">
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-bold mb-4 text-[#3b82f6] dark:text-[#3b82f6]">订阅管理</h1>
+          <h1 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-600 dark:from-blue-400 dark:to-indigo-500">订阅管理</h1>
           
           <div className="flex space-x-3">
             {/* 上传YAML文件按钮 */}
@@ -410,24 +384,25 @@ export default function SubscriptionManager() {
           </div>
         </div>
         
-        {/* 拖放区域 - 始终存在但只在拖动时可见 */}
+        {/* 拖放区域 */}
         <div 
-          className={`fixed inset-0 z-50 flex items-center justify-center bg-black/20 backdrop-blur-sm transition-opacity duration-300 ${
-            isDragging ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+          className={`mb-6 border-2 border-dashed rounded-lg p-8 text-center transition-colors ${
+            isDragging 
+              ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20' 
+              : 'border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/30'
           }`}
+          onDragOver={handleDragOver}
+          onDragLeave={handleDragLeave}
+          onDrop={handleDrop}
         >
-          <div className={`bg-white dark:bg-[#2a2a2a] rounded-lg p-8 shadow-xl border-2 border-dashed border-blue-500 mx-4 max-w-lg w-full transition-transform duration-300 transform ${
-            isDragging ? 'scale-100' : 'scale-95'
-          }`}>
-            <div className="flex flex-col items-center justify-center">
-              <UploadIcon className="w-16 h-16 mb-4 text-blue-500" />
-              <p className="text-lg font-medium text-gray-700 dark:text-gray-300">
-                释放以上传YAML配置文件
-              </p>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-                支持.yaml和.yml格式文件
-              </p>
-            </div>
+          <div className="flex flex-col items-center justify-center">
+            <UploadIcon className={`w-10 h-10 mb-3 ${isDragging ? 'text-blue-500' : 'text-gray-400 dark:text-gray-500'}`} />
+            <p className="text-sm font-medium text-gray-700 dark:text-gray-300">
+              拖放YAML配置文件到此处
+            </p>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+              或 <button onClick={triggerFileInput} className="text-blue-500 hover:underline">点击上传</button>
+            </p>
           </div>
         </div>
         
