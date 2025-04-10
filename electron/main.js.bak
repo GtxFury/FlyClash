@@ -11,7 +11,7 @@ const serveStatic = require('serve-static');
 const finalhandler = require('finalhandler');
 
 // 应用版本号 - 统一管理所有界面显示的版本
-const APP_VERSION = '0.1.2';
+const APP_VERSION = '0.1.1';
 
 let mainWindow;
 let tray;
