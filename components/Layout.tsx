@@ -24,7 +24,7 @@ export default function Layout({ children }: LayoutProps) {
   const pathname = usePathname();
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [appVersion, setAppVersion] = useState('0.1.6');
+  const [appVersion, setAppVersion] = useState('0.1.1');
   
   const menuItems = [
     { name: '控制面板', href: '/', icon: <DashboardIcon className="w-5 h-5" /> },
@@ -32,6 +32,7 @@ export default function Layout({ children }: LayoutProps) {
     { name: '连接数据', href: '/connections', icon: <BarChartIcon className="w-5 h-5" /> },
     { name: '订阅管理', href: '/subscriptions', icon: <ReaderIcon className="w-5 h-5" /> },
     { name: '实用工具', href: '/tools', icon: <MixerHorizontalIcon className="w-5 h-5" /> },
+    { name: '配置测速', href: '/speedtest', icon: <RocketIcon className="w-5 h-5" /> },
     { name: '系统设置', href: '/settings', icon: <GearIcon className="w-5 h-5" /> },
   ];
 
