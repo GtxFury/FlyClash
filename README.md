@@ -107,6 +107,12 @@ npm run electron:build
 - [Radix UI](https://www.radix-ui.com) - 无障碍UI组件
 - [Tailwind CSS](https://tailwindcss.com) - CSS框架
 
+## 支持我们
+
+有你的支持FlyClash项目会变得更好
+TJY86BFF9NMFKLw7izNTC1RiRUKDdQndra
+usdt trc20
+
 ## 许可证
 
 [MIT License](LICENSE)
