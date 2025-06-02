@@ -110,7 +110,9 @@ npm run electron:build
 ## 支持我们
 
 有你的支持FlyClash项目会变得更好
+
 TJY86BFF9NMFKLw7izNTC1RiRUKDdQndra
+
 usdt trc20
 
 ## 许可证
