@@ -17,6 +17,7 @@ module.exports = function initMihomoService(context) {
   const { applyOverrides } = require('../ipc-handlers/overrides');
   const { getMihomoControllerParam, cleanupSocketFile } = require('../utils/socket-path');
   const { RunningMode, setRunningMode, getRunningMode, isServiceMode, getSocketPath, getServiceSocketPath, getSidecarSocketPath } = require('../utils/running-mode');
+  const { appendBoundedOutput } = require('./bounded-output-buffer');
   console.log('[mihomo-service] applyOverrides函数已导入:', typeof applyOverrides);
 
   async function waitForProcessExit(proc, timeoutMs = 5000) {
@@ -1200,7 +1201,7 @@ module.exports = function initMihomoService(context) {
 
       spawnedProcess.stdout.on('data', (data) => {
         const logContent = data.toString();
-        stdoutOutput += logContent;  // 收集 stdout 输出
+        stdoutOutput = appendBoundedOutput(stdoutOutput, logContent);  // 收集最近的 stdout 输出
         console.log(`mihomo stdout: ${logContent}`);
 
         // 检测 TUN 启动失败
@@ -1258,7 +1259,7 @@ module.exports = function initMihomoService(context) {
 
       spawnedProcess.stderr.on('data', (data) => {
         const errorText = data.toString();
-        stderrOutput += errorText;  // 收集 stderr 输出
+        stderrOutput = appendBoundedOutput(stderrOutput, errorText);  // 收集最近的 stderr 输出
         console.error(`mihomo stderr: ${errorText}`);
         safeSend('mihomo-error', errorText);
         process.stderr.write(data);
