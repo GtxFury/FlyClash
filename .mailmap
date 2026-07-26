@@ -1,0 +1,10 @@
+# 统一提交作者身份。
+#
+# 早期提交使用了未配置的本地 git 身份（作者名为 "unknown" 及个人邮箱），
+# 此处将其规范化到项目署名。git log / shortlog / blame 与 GitHub 均会应用本映射。
+#
+# 格式：<规范姓名> <规范邮箱> <历史姓名> <历史邮箱>
+
+GtxFury <32810165+GtxFury@users.noreply.github.com> unknown <a905212091@gmail.com>
+GtxFury <32810165+GtxFury@users.noreply.github.com> CodexSandboxOffline <a905212091@gmail.com>
+GtxFury <32810165+GtxFury@users.noreply.github.com> None <none@nonedeMacBook-Pro.local>
